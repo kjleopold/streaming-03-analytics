@@ -73,7 +73,7 @@ log_env_vars(LOG)
 # === DECLARE GLOBAL CONSTANTS ===
 
 # get from .env as strings with defaults
-msg_count = os.getenv("PRODUCER_MESSAGE_COUNT", "12")
+msg_count = os.getenv("PRODUCER_MESSAGE_COUNT", "6")
 msg_interval_seconds = os.getenv("PRODUCER_MESSAGE_INTERVAL_SECONDS", "1.0")
 
 # then convert to correct types for CONSTANTS
