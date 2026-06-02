@@ -79,6 +79,7 @@ analysis.
 ### Data Engineering and Enrichment
 
 The consumer generated several derived fields to make the data more useful.
+
 These included:
 
 - subtotal
