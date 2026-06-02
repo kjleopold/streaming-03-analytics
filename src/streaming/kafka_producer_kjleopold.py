@@ -49,13 +49,13 @@ from datafun_toolkit.logger import get_logger, log_header, log_path
 from dotenv import load_dotenv
 
 from streaming.core.utils import log_env_vars
-from streaming.data_validation.data_contract_case import (
+from streaming.data_validation.data_contract_kjleopold import (
     PRODUCTS_REQUIRED_FIELDS,
     REGIONS_REQUIRED_FIELDS,
     REJECTED_SALES_FIELDNAMES,
     validate_sale_record,
 )
-from streaming.data_validation.data_validation_case import (
+from streaming.data_validation.data_validation_kjleopold import (
     add_validation_errors,
     make_lookup_set,
     validate_reference_records,
@@ -337,6 +337,13 @@ def send_messages(
     try:
         for message in generate_messages(MESSAGE_COUNT):
             LOG.info(format_message_for_log(message))
+
+            # TEMPORARY TEST FILTER
+            if not message.get("discount_code"):
+                LOG.info("Skipping non-discounted sale")
+                continue
+
+            LOG.info(f"FOUND DISCOUNT: {message['discount_code']}")
 
             result = validate_sale_record(
                 record=message,

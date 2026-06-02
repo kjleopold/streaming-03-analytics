@@ -1,4 +1,4 @@
-"""src/streaming/kafka_consumer_case.py.
+"""src/streaming/kafka_consumer_kjleopold.py.
 
 Kafka consumer: analytics
 
@@ -49,7 +49,7 @@ from dotenv import load_dotenv
 
 from streaming.core.utils import log_env_vars
 from streaming.data_engineering.derived_fields import enrich_message
-from streaming.data_validation.data_contract_case import (
+from streaming.data_validation.data_contract_kjleopold import (
     CONSUMED_FIELDNAMES,
     SALES_REQUIRED_FIELDS,
     validate_required_fields,
@@ -235,6 +235,7 @@ def load_reference_data() -> dict[str, float]:
         ).items()
     }
     LOG.info(f"Found {len(region_lookup)} region tax rates.")
+
     return region_lookup
 
 
@@ -271,6 +272,9 @@ def process_message(
 
     # Then, enrich the message with derived fields.
     enriched = enrich_message(row, region_lookup)
+    enriched["discount_applied"] = "Yes" if row.get("discount_code") else "No"
+    enriched["discount_used"] = row.get("discount_code", "NONE")
+
     LOG.info(f"subtotal={enriched['subtotal']}")
     LOG.info(f"tax={enriched['tax_amount']}")
     LOG.info(f"total={enriched['total']}")

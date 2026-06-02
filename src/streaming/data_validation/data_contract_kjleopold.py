@@ -1,4 +1,4 @@
-"""src/streaming/data_validation/data_contract_case.py.
+"""src/streaming/data_validation/data_contract_kjleopold.py.
 
 Defines what a valid message looks like for this project:
 required fields, allowed values, reference table fields,
@@ -134,6 +134,8 @@ CONSUMED_FIELDNAMES: Final[list[str]] = [
     "subtotal",
     "tax_amount",
     "total",
+    "discount_applied",
+    "discount_used",
     "_kafka_key",
     "_kafka_partition",
     "_kafka_offset",
